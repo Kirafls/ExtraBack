@@ -3,9 +3,13 @@ const app = express();
 const puerto=3000;
 const mysql=require("mysql");
 const {nuevo, mostrar}=require("./consultas");
+const cors=require('cors');
+const bodyparse=require("body-parser");
 
 
-app.use(express.json());
+app.use(cors());
+app.use(bodyparse.json());
+app.use(bodyparse.urlencoded({extended:false}));
 
 const connection =mysql.createConnection({
     host:"localhost",
@@ -18,6 +22,8 @@ connection.connect((err)=>{
     if(err) throw err;
     console.log("Coneccion con la base de datos");
 })
+
+app.use(require("./routes/coreoRuta"));
 
 app.get("/",(req,res)=>{
     res.send("Servidor corriendo");
