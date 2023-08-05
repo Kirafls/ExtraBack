@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const puerto=3000;
 const mysql=require("mysql");
-const {nuevo, mostrar}=require("./consultas");
+const {nuevo, mostrar, eliminar}=require("./consultas");
 const cors=require('cors');
 const bodyparse=require("body-parser");
 
@@ -36,11 +36,20 @@ app.post("/nuevo",(req,res)=>{
     let carrera=req.body.carrera;
     let fecha=req.body.fecha;
     let promedio=req.body.promedio;
+    let genero=req.body.genero;
     let prepa=req.body.prepa;
-    nuevo(connection,{nombre:nombre,apellido:apellido,prepa:prepa,carrera:carrera,fecha:fecha,promedio:promedio},result=>{
+    nuevo(connection,{nombre:nombre,apellido:apellido,prepa:prepa,carrera:carrera,fecha:fecha,genero:genero,promedio:promedio},result=>{
         res.send(result);
     });
 })
+
+app.post("/eliminar",(req,res)=>{
+    let id=req.body.id;
+    eliminar(connection,{id:id},result=>{
+        res.send(result);
+    });
+})
+
 
 app.get("/mostrar",(req,res)=>{
     mostrar(connection,result=>{
