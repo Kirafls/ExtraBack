@@ -25,12 +25,19 @@ connection.connect((err)=>{
 
 app.use(require("./routes/coreoRuta"));
 
+
 app.get("/",(req,res)=>{
     res.send("Servidor corriendo");
 })
 
-app.get("/nuevo",(req,res)=>{
-    nuevo(connection,{nombre:'Carlos',apellido:'Alba',carrera:'isc',promedio:'7'},result=>{
+app.post("/nuevo",(req,res)=>{
+    let nombre=req.body.nombre;
+    let apellido=req.body.apellido;
+    let carrera=req.body.carrera;
+    let fecha=req.body.fecha;
+    let promedio=req.body.promedio;
+    let prepa=req.body.prepa;
+    nuevo(connection,{nombre:nombre,apellido:apellido,prepa:prepa,carrera:carrera,fecha:fecha,promedio:promedio},result=>{
         res.send(result);
     });
 })

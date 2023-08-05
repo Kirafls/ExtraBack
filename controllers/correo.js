@@ -8,7 +8,7 @@ const envioCorreo=(req=request,resp=response)=>{
         post:587,
         auth:{
             user:'carloscogake@gmail.com',
-            pass:'exduivcbbjqqmttl'
+            pass:'lsoqsocirbafoznx'
         }
     });
     const opciones ={
